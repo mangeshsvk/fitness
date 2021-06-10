@@ -69,11 +69,13 @@ class _DisplayPillsListState extends State<DisplayPillsList> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text('Medicine Name'),
-                                        Text(widget
-                                            ._medicineList[index].medicineName),
-                                        Text('Take Medicines On'),
-                                        ListView.builder(
+                                        Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: [Text('Take Medicines On'),
+                                          Text(widget
+                                              ._medicineList[index].medicineName),],),
+
+                                        Text('Medicine Schedule:',style: TextStyle(fontWeight: FontWeight.bold),),
+
+                                        Container(height:deviceHeight*0.1,child:ListView.builder(
                                             itemCount:
                                             widget
                                                 ._medicineList[index].medicineDays.length,
@@ -82,49 +84,45 @@ class _DisplayPillsListState extends State<DisplayPillsList> {
                                                 NeverScrollableScrollPhysics(),
                                             itemBuilder: (context, index2) {
                                               print(widget._medicineList);
-                                              return InkWell(
-                                                  highlightColor: kPrimaryColor,
-                                                  child: ListTile(
-                                                    title: Text(
+                                              return Container(
+                                                padding:EdgeInsets.symmetric(horizontal: 10),child: Text(
                                                       widget
                                                           ._medicineList[index].medicineDays[index2],
                                                       style: TextStyle(
                                                           color: Colors.black),
                                                     ),
-                                                  ),
-                                                  onTap: () {});
-                                            }),
-                                        Text('Medicine Timings'),
-                                        ListView.builder(
+                                                  );
+                                            }),),
+                                        Text('Medicine Timing',style: TextStyle(fontWeight: FontWeight.bold),),
+                                        Container(
+                                          height:deviceHeight*0.1,child:ListView.builder(
                                             itemCount:
                                             widget
                                                 ._medicineList[index].medicineSchedule.length,
-                                            scrollDirection: Axis.vertical,
+                                            scrollDirection: Axis.horizontal,
                                             physics:
                                             NeverScrollableScrollPhysics(),
                                             itemBuilder: (context, index3) {
                                               print(widget._medicineList);
-                                              return InkWell(
-                                                  highlightColor: kPrimaryColor,
-                                                  child: ListTile(
-                                                    title: Text(
-                                                      widget
-                                                          ._medicineList[index].medicineSchedule[index3],
-                                                      style: TextStyle(
-                                                          color: Colors.black),
-                                                    ),
-                                                  ),
-                                                  onTap: () {});
-                                            }),
+                                              return Container(
+                                                padding:EdgeInsets.symmetric(horizontal: 10),child:
+                                              Text(
+                                                widget
+                                                    ._medicineList[index].medicineSchedule[index3],
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              ),);
+                                            }),),
                                         Container(
                                           decoration: BoxDecoration(
-                                              color: Colors.black,
+                                              color: Colors.green,
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(
                                                       nameSize / 4))),
                                           child: Center(
                                             child: TextButton(
                                               onPressed: () {
+
                                                 Navigator.of(context).pop();
                                               },
                                               child: Text(
@@ -138,7 +136,7 @@ class _DisplayPillsListState extends State<DisplayPillsList> {
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
-                                              color: Colors.black,
+                                              color: Colors.red,
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(
                                                       nameSize / 4))),
