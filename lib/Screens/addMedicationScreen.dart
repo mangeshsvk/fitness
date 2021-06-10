@@ -1,6 +1,7 @@
 import 'package:fitness/Providers/medicine.dart';
 import 'package:fitness/Providers/medicines.dart';
 import 'package:fitness/Screens/pillBox.dart';
+import 'package:fitness/Widgets/displayDays.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Providers/timeslot.dart';
@@ -217,72 +218,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                         height: nameSize,
                       ),
                       _isWeekly || _isMonthly
-                          ? Container(
-                              width: deviceWidth,
-                              height: deviceHeight * 0.042,
-                              child: ListView.builder(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: nameSize / 4),
-                                itemCount: _isWeekly ? 7 : 2,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  if (_isWeekly == true) {
-                                    _selectedList = [
-                                      'Mon',
-                                      'Tue',
-                                      'Wed',
-                                      'Thu',
-                                      'Fri',
-                                      'Sat',
-                                      'Sun'
-                                    ];
-                                  }
-                                  if (_isMonthly == true) {
-                                    _selectedList = [
-                                      'Once a Week',
-                                      'Twice a Week'
-                                    ];
-                                  }
-
-                                  return Row(
-                                    children: [
-                                      GestureDetector(
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: nameSize / 2.3),
-                                          decoration: BoxDecoration(
-                                            color: _selectedDays.contains(
-                                                    _selectedList[index])
-                                                ? Colors.black
-                                                : Colors.grey,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(nameSize / 4)),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              _selectedList[index],
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          setState(() {
-                                            if(_selectedDays.contains(_selectedList[index])){
-                                              _selectedDays.remove(_selectedList[index]);
-                                            }else{
-                                              _selectedDays.add(_selectedList[index]);
-                                            }
-                                          });
-                                        },
-                                      ),
-                                      SizedBox(
-                                        width: nameSize/2,
-                                      )
-                                    ],
-                                  );
-                                },
-                              ))
+                          ? DisplayDaysWidget(_isWeekly, _isMonthly, _selectedDays, _selectedList)
                           : Container(),
                       SizedBox(
                         height: nameSize / 4,
